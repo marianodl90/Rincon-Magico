@@ -1,13 +1,35 @@
 {% extends "rinconapp/padre.html" %}
-
 {% load static %}
 
-
 {% block content %}
-<h1>Lista de Clientes</h1>
-<ul>
-    {% for reserva in reservas %}
-    <li> {{reserva.fecha}} {{reserva.plaza}} {{reserva.direccion}} {{reserva.seña}}</li>
-    {% endfor %}
-</ul>
+<!-- Título centrado sin separación del formulario -->
+<h1 style="text-align: center; margin: 10px;">Reserva tu Momento Mágico</h1>
+
+<!-- Contenedor centrado con formulario agrandado -->
+<div style="display: flex; justify-content: center; align-items: center; min-height: 50vh;">
+    <form method="post" style="
+        width: 400px;
+        padding: 30px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #acd5d9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    ">
+        {% csrf_token %}
+
+        <input type="text" name="nombre" placeholder="Nombre" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+
+        <input type="text" name="apellido" placeholder="Apellido" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+
+        <input type="text" name="plaza" placeholder="Plaza" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+
+        <input type="date" name="fecha" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+
+        <input type="text" name="direccion" placeholder="Dirección" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+
+        <input type="number" name="sena" step="0.01" placeholder="Seña" required style="width: 100%; padding: 10px; margin-bottom: 20px;"><br>
+
+        <input type="submit" value="Reservar" style="width: 100%; padding: 12px; background-color: #ead0d1; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    </form>
+</div>
 {% endblock %}
