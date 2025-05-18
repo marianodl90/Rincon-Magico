@@ -1,22 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
+    {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rincon Magico</title>
 </head>
+
 <body>
-    <h1>Rincon Magico</h1>
-<header>
+
+    <header>
+        <h1>Rincon Magico</h1>
+    </header>
+
     <nav class="navbar">
         <div class="container">
-            
             <a class="" href="{% url  'mostrar_calendario_reservas' %}">Calendario</a>
             <a class="" href="{% url 'mostrar_reservas' %}">Reservas</a>
             <a class="" href="{% url 'lista_clientes' %}">Lista de Clientes</a>
         </div>
     </nav>
-</head>
+    <section>
+        <div class="container">
+            <img src="{% static 'rinconapp/assets/img/whatsapp.jpeg' %}" alt="pelotero">
+        </div>
+        </section>
+    <main>
+
+    </main>
+    <footer style="background-color: grey; color: #fff; padding: 20px; text-align: center;">
+        <h2>Rincón Mágico</h2>
+
+        <div style="margin-top: 10px;">
+            <a href="https://www.instagram.com/rinconmagico" target="_blank"
+                style="margin: 0 15px; text-decoration: none; color: #fff;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"
+                    style="width:32px; height:32px; vertical-align: middle; margin-right: 8px;">
+                <span style="font-size: 18px;"></span>
+            </a>
+
+            <a href="https://wa.me/5491123456789" target="_blank"
+                style="margin: 0 15px; text-decoration: none; color: #fff;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
+                    style="width:32px; height:32px; vertical-align: middle; margin-right: 8px;">
+                <span style="font-size: 18px;"></span>
+            </a>
+        </div>
+    </footer>
+
 
 </body>
+
 </html>
