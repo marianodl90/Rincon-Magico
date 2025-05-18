@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Cliente, Reserva
+from django.shortcuts import render
+from .models import Cliente, Reserva, Calendario
 
 def lista_clientes(request):
     cliente = Cliente.objects.all()
@@ -12,3 +12,7 @@ def mostrar_reservas(request):
 
 def mostrar_calendario_reservas(request):
     return render(request, "rinconapp/calendario.html")
+
+def vista_padre(request):
+    return render(request, 'rinconapp/padre.html')
+
