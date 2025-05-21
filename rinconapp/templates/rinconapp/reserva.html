@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block content %}
-<!-- Título centrado sin separación del formulario -->
+
 <h1 style="text-align: center; margin: 10px;">Reserva tu Momento Mágico</h1>
 
-<!-- Contenedor centrado con formulario agrandado -->
+
 <div style="display: flex; justify-content: center; align-items: center; min-height: 50vh;">
-    <form action="" method="POST" style="
+    <form method="POST" action="{% url 'reserva_formulario' %}" style="
         width: 400px;
         padding: 30px;
         border: 1px solid #ccc;
@@ -19,15 +19,17 @@
 
         <input type="text" name="nombre" placeholder="Nombre" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="text" name="apellido" placeholder="Apellido" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="text" name="telefono" placeholder="Telefono" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="text" name="plaza" placeholder="Plaza" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="text" name="nombre_plaza" placeholder="Plaza" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="date" name="fecha" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="text" name="pago" placeholder="pago" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="text" name="direccion" placeholder="Dirección" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="date" name="fecha_evento" placeholder="Fecha del evento" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="number" name="sena" step="0.01" placeholder="Seña" required style="width: 100%; padding: 10px; margin-bottom: 20px;"><br>
+        <input type="datetime" name="hora_evento" placeholder="Hora del evento" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+
+        <input type="text" name="direccion_evento" placeholder="Direccion del evento" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
         <input type="submit" value="Reservar" style="width: 100%; padding: 12px; background-color: #ead0d1; color: white; border: none; border-radius: 5px; cursor: pointer;" class="btn btn-reservar"></a>
         

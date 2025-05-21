@@ -1,29 +1,34 @@
+import time
 from django.db import models
+from django.utils import timezone
+
 
 class Cliente(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=20)
+    
 
     def __str__(self):
-        return f"{self.nombre}{self.apellido}{self.telefono}{self.email}"
+        return f"{self.nombre}{self.telefono}"
     
+
+    
+
+class Plaza(models.Model):
+    nombre_plaza = models.CharField(max_length=100)
+    pago = models.DecimalField(max_digits=8, decimal_places=2)
+   
+
+    def __str__(self):
+        return f"{self.nombre_plaza}{self.pago}"
+    
+
 class Reserva(models.Model):
-    fecha = models.DateField()
-    plaza = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=50)
-    seña = models.IntegerField()
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, default=1)
+    plaza = models.ForeignKey(Plaza, on_delete=models.CASCADE, default=1)
+    fecha_evento = models.DateField(default=timezone.now)
+    hora_evento = models.TimeField()
+    direccion_evento = models.CharField(max_length=255, default="Por definir")
 
     def __str__(self):
-        return f"{self.fecha}{self.plaza}{self.direccion}{self.seña}"
-    
-
-class Calendario(models.Model):
-    fecha = models.DateField()
-    hora = models.TimeField()
-
-    def __str__(self):
-        return f"{self.fecha}{self.hora}"
-    
-
+        return f"{self.cliente}{self.plaza}{self.fecha_evento}{self.hora_evento}{self.direccion_evento}"

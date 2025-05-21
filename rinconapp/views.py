@@ -1,43 +1,45 @@
 from django.shortcuts import render
-from .models import Cliente, Reserva
-from rinconapp.forms import ReservaFormulario
+from .models import Cliente, Plaza, Reserva
+from rinconapp.forms import formulario_reserva
 
-def lista_clientes(request):
-    cliente = Cliente.objects.all()
-    return render(request, "rinconapp/cliente.html", {'cliente': cliente})
-
-
-def mostrar_calendario_reservas(request):
-    return render(request, "rinconapp/calendario.html")
 
 def vista_padre(request):
     return render(request, 'rinconapp/padre.html')
 
-def reserva_formulario(request):
-    """
-    if request.method == 'POST':
-        cliente = Cliente(nombre =request.POST['nombre'], apellido=request.POST['apellido'], telefono=request.POST['telefono'], email=request.POST['email'])
-        reserva = Reserva(fecha=request.POST['fecha'], plaza=request.POST['plaza'], direccion=request.POST['direccion'],
-                          seña=request.POST['seña'])
-        cliente.save()
-        reserva.save()
-        return render(request, 'rinconapp/reserva.html')
-    
-    return render(request, 'rinconapp/reserva.html')
+def lista_clientes(request):
+    clientes = Cliente.objects.all()
+    return render(request, "rinconapp/cliente.html", {'clientes': clientes})
 
-    """
-    if request.method == 'POST':
-        mi_formulario = ReservaFormulario(request.POST)
+
+
+def reserva_formulario(request):
+    if request.method == "POST":
+        mi_formulario = formulario_reserva(request.POST)
         if mi_formulario.is_valid():
             informacion = mi_formulario.cleaned_data
 
-            cliente = Cliente(nombre=informacion['nombre'], apellido=informacion['apellido'], telefono=informacion['telefono'], email=informacion['email'])
-            cliente.save()
+            # Buscar o crear cliente
+            cliente, _ = Cliente.objects.get_or_create(
+                nombre=informacion['nombre'],
+                telefono=informacion['telefono']
+            )
 
-            reserva = Reserva(fecha=informacion['fecha'], plaza=informacion['plaza'], direccion=informacion['direccion'])
+            # Buscar o crear plaza (opcional)
+            plaza, _ = Plaza.objects.get_or_create(
+                nombre_plaza=informacion['nombre_plaza'],
+                pago=informacion['pago']
+            )
+
+            # Crear reserva
+            reserva = Reserva(
+                cliente=cliente,
+                plaza=plaza,
+                fecha_evento=informacion['fecha_evento'],
+                hora_evento=informacion['hora_evento'],
+                direccion_evento=informacion['direccion_evento']
+            )
             reserva.save()
 
             return render(request, 'rinconapp/reserva.html')    
-    
-    return render(request, 'rinconapp/reserva.html')
 
+    return render(request, 'rinconapp/reserva.html')
