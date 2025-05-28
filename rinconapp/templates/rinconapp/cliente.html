@@ -1,14 +1,50 @@
 {% extends "rinconapp/padre.html" %}
-
 {% load static %}
 
-
 {% block content %}
-<h1>Lista de Clientes</h1>
-<ul>
-    {% for cliente in clientes %}
-    <li> {{cliente.nombre}} {{cliente.telefono}}</li>
-    {% endfor %}
-</ul>
-{% endblock %}
+<style>
+    .reservas-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
+    }
 
+    .reserva-casillero {
+        display: flex;
+        background-color: #acd5d9;
+        padding: 0;
+        margin: 5px 0;
+        width: 650px; 
+        font-size: 18px;
+        overflow: hidden;
+    }
+
+    .casillero {
+        flex: 1;
+        padding: 15px 10px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        border: 1px solid white;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+<div class="reservas-container">
+    <h1>Lista de Clientes</h1>
+    {% for reserva in reservas %}
+    <div class="reserva-casillero">
+        <div class="casillero">{{ reserva.cliente.nombre }}</div>
+        <div class="casillero">{{ reserva.cliente.telefono }}</div>
+        <div class="casillero">{{ reserva.plaza.nombre_plaza }}</div>
+        <div class="casillero">{{ reserva.plaza.pago }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

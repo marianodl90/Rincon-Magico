@@ -7,8 +7,8 @@ def vista_padre(request):
     return render(request, 'rinconapp/padre.html')
 
 def lista_clientes(request):
-    clientes = Cliente.objects.all()
-    return render(request, "rinconapp/cliente.html", {'clientes': clientes})
+    reservas = Reserva.objects.select_related('cliente', 'plaza').all()
+    return render(request, "rinconapp/cliente.html", {'reservas': reservas})
 
 
 
@@ -18,19 +18,16 @@ def reserva_formulario(request):
         if mi_formulario.is_valid():
             informacion = mi_formulario.cleaned_data
 
-            # Buscar o crear cliente
             cliente, _ = Cliente.objects.get_or_create(
                 nombre=informacion['nombre'],
                 telefono=informacion['telefono']
             )
 
-            # Buscar o crear plaza (opcional)
             plaza, _ = Plaza.objects.get_or_create(
                 nombre_plaza=informacion['nombre_plaza'],
                 pago=informacion['pago']
             )
 
-            # Crear reserva
             reserva = Reserva(
                 cliente=cliente,
                 plaza=plaza,
