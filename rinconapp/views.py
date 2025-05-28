@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Cliente, Plaza, Reserva
 from rinconapp.forms import formulario_reserva
 
@@ -40,3 +40,11 @@ def reserva_formulario(request):
             return render(request, 'rinconapp/reserva.html')    
 
     return render(request, 'rinconapp/reserva.html')
+
+def eliminar_cliente_y_reserva(request,id):
+
+    reserva = Reserva.objects.get(id=id)
+    cliente = reserva.cliente
+    Reserva.objects.filter(cliente=cliente).delete()
+    cliente.delete()
+    return redirect('lista_clientes')
