@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Plaza, Reserva
 from rinconapp.forms import formulario_reserva
-
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.http import HttpResponseBadRequest
 
 def vista_padre(request):
     return render(request, 'rinconapp/padre.html')
@@ -41,6 +42,7 @@ def reserva_formulario(request):
 
     return render(request, 'rinconapp/reserva.html')
 
+
 def eliminar_cliente_y_reserva(request,id):
 
     reserva = Reserva.objects.get(id=id)
@@ -48,3 +50,57 @@ def eliminar_cliente_y_reserva(request,id):
     Reserva.objects.filter(cliente=cliente).delete()
     cliente.delete()
     return redirect('lista_clientes')
+
+
+
+def actualizar_cliente_y_reserva(request, id):
+    reserva = Reserva.objects.get(id=id)
+    cliente = reserva.cliente
+    plaza = reserva.plaza
+
+    if request.method == "POST":
+        mi_formulario = formulario_reserva(request.POST)
+        if mi_formulario.is_valid():
+            datos = mi_formulario.cleaned_data
+
+            cliente.nombre = datos["nombre"]
+            cliente.telefono = datos["telefono"]
+            cliente.save()
+
+            plaza.nombre_plaza = datos["nombre_plaza"]
+            plaza.pago = datos["pago"]
+            plaza.save()
+
+            reserva.fecha_evento = datos["fecha_evento"]
+            reserva.hora_evento = datos["hora_evento"]
+            reserva.direccion_evento = datos["direccion_evento"]
+            reserva.save()
+
+            return render(request, 'rinconapp/cliente.html', {"reserva":reserva})
+        return HttpResponseBadRequest("Formulario inválido.")
+
+        
+
+    else:
+        datos_iniciales = {
+            "nombre": cliente.nombre,
+            "telefono": cliente.telefono,
+            "nombre_plaza": plaza.nombre_plaza,
+            "pago": plaza.pago,
+            "fecha_evento": reserva.fecha_evento,
+            "hora_evento": reserva.hora_evento,
+            "direccion_evento": reserva.direccion_evento
+        }
+        mi_formulario = formulario_reserva(initial=datos_iniciales)
+    
+    return render(request, "rinconapp/editar_cliente.html", {"mi_formulario": mi_formulario, "reserva": reserva})
+
+
+def login_cliente(request):
+
+    if request.method == "POST":
+        pass
+
+    else:
+        form = UserCreationForm()
+        return render(request, "rinconapp/login.html", {"form":form})

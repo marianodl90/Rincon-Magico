@@ -1,0 +1,30 @@
+{% extends "rinconapp/padre.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Forma parte de nuestra Comunidad Mágica</h1>
+
+  <div class="row justify-content-center">
+    <div class="col-auto" style="min-width: 360px; max-width: 480px;">
+      <form action="" method="post" class="p-4 border rounded shadow bg-light">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="mb-3">
+            <div class="d-flex justify-content-center">
+              <div style="width: 85%;"> <!-- Ajusta el ancho aquí -->
+                {{ field }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        <div class="d-flex justify-content-center">
+          <div style="width: 42.5%;"> <!-- Ancho reducido al 50% del anterior -->
+            <input type="submit" value="ENVIAR" class="btn btn-primary w-100">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

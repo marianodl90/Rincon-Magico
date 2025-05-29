@@ -45,6 +45,7 @@
         <div class="casillero">{{ reserva.plaza.nombre_plaza }}</div>
         <div class="casillero">{{ reserva.plaza.pago }}</div>
         <a href="{% url 'eliminar_cliente_y_reserva' reserva.id %}">ELIMINAR</a>
+        <a href="{% url 'actualizar_cliente_y_reserva' reserva.id %}">ACTUALIZAR</a>
     </div>
     {% endfor %}
 </div>
