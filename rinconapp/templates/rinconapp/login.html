@@ -7,19 +7,26 @@
 
   <div class="row justify-content-center">
     <div class="col-auto" style="min-width: 360px; max-width: 480px;">
-      <form action="" method="post" class="p-4 border rounded shadow bg-light">
+      <form action="" method="post" class="p-4 border rounded shadow bg-light text-center">
         {% csrf_token %}
         {% for field in form %}
           <div class="mb-3">
+            {% if forloop.counter == 1 %}
+              <label for="{{ field.id_for_label }}" class="form-label fw-bold text-dark">Usuario</label>
+            {% elif forloop.counter == 2 %}
+              <label for="{{ field.id_for_label }}" class="form-label fw-bold text-dark">Contraseña</label>
+            {% elif forloop.counter == 3 %}
+              <label for="{{ field.id_for_label }}" class="form-label fw-bold text-dark">Confirmar Contraseña</label>
+            {% endif %}
             <div class="d-flex justify-content-center">
-              <div style="width: 85%;"> <!-- Ajusta el ancho aquí -->
+              <div style="width: 85%;">
                 {{ field }}
               </div>
             </div>
           </div>
         {% endfor %}
         <div class="d-flex justify-content-center">
-          <div style="width: 42.5%;"> <!-- Ancho reducido al 50% del anterior -->
+          <div style="width: 42.5%;">
             <input type="submit" value="ENVIAR" class="btn btn-primary w-100">
           </div>
         </div>

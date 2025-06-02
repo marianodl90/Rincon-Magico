@@ -3,6 +3,10 @@ from .models import Cliente, Plaza, Reserva
 from rinconapp.forms import formulario_reserva
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpResponseBadRequest
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+
+
 
 def vista_padre(request):
     return render(request, 'rinconapp/padre.html')
@@ -77,7 +81,7 @@ def actualizar_cliente_y_reserva(request, id):
             reserva.save()
 
             return render(request, 'rinconapp/cliente.html', {"reserva":reserva})
-        return HttpResponseBadRequest("Formulario inválido.")
+        return HttpResponseBadRequest("Formulario inválido. LLene los campos con datos validos (horario xx : xx)")
 
         
 
@@ -96,11 +100,51 @@ def actualizar_cliente_y_reserva(request, id):
     return render(request, "rinconapp/editar_cliente.html", {"mi_formulario": mi_formulario, "reserva": reserva})
 
 
-def login_cliente(request):
+#def login_cliente(request): "EJEMPLO DEL PROFESOR"
 
     if request.method == "POST":
-        pass
+        form = AuthenticationForm(request, data=request.POST) 
+        if form.is_valid():
+            usuario = form.cleaned_data.get("username")
+            contra = form.cleaned_data.get("password")
 
-    else:
-        form = UserCreationForm()
-        return render(request, "rinconapp/login.html", {"form":form})
+        user = authenticate(username= usuario, password= contra)
+        if user is not None:  #Es lo mismo que preguntar si existe el user
+            login(request, user)
+            return render(request, "rinconapp/inicio.html", {"mensaje" : f"Bienvenido/a: {usuario}"})
+        else:
+            return HttpResponse("Usuario no encontrado")
+
+    form = AuthenticationForm()
+    return render(request, "rinconapp/login.html", {"form": form})
+        
+
+
+    #EJEMPLO DEL PROFESOR PERO CON VALIDACION PARA USAR SIEMPRE UN FORMULARIO VALIDO. SI NO HAY FORMULARIO RETORNA NUEVAMENTE EL TEMPLATE DE LOGIN.
+def login_cliente(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get("username")
+            contra = form.cleaned_data.get("password")
+
+            user = authenticate(username=usuario, password=contra)
+
+            if user is not None: #Es lo mismo que preguntar si existe el user
+                login(request, user)
+                return render(request, "rinconapp/inicio.html", {"mensaje": f"Bienvenido/a: {usuario}"})
+            else:
+                return render(request, "rinconapp/login.html", {
+                    "form": form,
+                    "error": "Usuario no encontrado o contraseña incorrecta."
+                })
+        else:
+            return render(request, "rinconapp/login.html", {
+                "form": form,
+                "error": "Formulario inválido. Revisa los datos ingresados."
+            })
+
+    
+    form = AuthenticationForm()
+    return render(request, "rinconapp/login.html", {"form": form})
