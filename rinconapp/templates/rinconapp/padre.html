@@ -128,10 +128,24 @@
                 alt="Logo del centro recreativo infantil Rincón Mágico" class="navbar-logo mb-3" />
         </div>
         <div class="container d-flex justify-content-center gap-3">
+            {% if not request.user.is_authenticated %}
             <a class="nav-link fw-bold" href="{% url 'inicio' %}">Inicio</a>
+            {% endif%}
+            {% if request.user.is_authenticated %}
             <a class="nav-link fw-bold" href="{% url 'reserva_formulario' %}">Reservas</a>
+            {% endif %}
+            {% if request.user.is_authenticated %}
             <a class="nav-link fw-bold" href="{% url 'lista_clientes' %}">Lista de Clientes</a>
-            <a class="nav-link fw-bold" href="{% url 'login_cliente' %}">Login</a>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            <a class="nav-link fw-bold" href="{% url 'logout' %}">Cerrar Sesion</a>
+            {% endif %}
+            {% if not request.user.is_authenticated %}
+            <a class="nav-link fw-bold" href="{% url 'login_cliente' %}">Iniciar Sesion</a>
+            {% endif %}
+            {% if not request.user.is_authenticated %}
+            <a class="nav-link fw-bold" href="{% url 'productos' %}">Plazas y Rincones</a>
+            {% endif %}
         </div>
     </nav>
 

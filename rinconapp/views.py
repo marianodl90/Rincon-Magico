@@ -148,3 +148,15 @@ def login_cliente(request):
     
     form = AuthenticationForm()
     return render(request, "rinconapp/login.html", {"form": form})
+
+def logout(request):
+    
+    if request.method == "POST":
+        pass
+
+    else:
+        return render(request, "rinconapp/padre.html")
+    
+
+def productos(request):
+    return render(request, "rinconapp/productos.html")

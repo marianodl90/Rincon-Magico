@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from rinconapp.forms import formulario_reserva
+from django.contrib.auth.views import LogoutView
 
 
 urlpatterns =[
@@ -9,5 +10,7 @@ urlpatterns =[
     path('reserva/', views.reserva_formulario, name='reserva_formulario'),
     path('eliminar/<int:id>', views.eliminar_cliente_y_reserva, name='eliminar_cliente_y_reserva'),
     path('actualizar/<int:id>', views.actualizar_cliente_y_reserva, name='actualizar_cliente_y_reserva'),
-    path('login', views.login_cliente, name='login_cliente'),
+    path('login/', views.login_cliente, name='login_cliente'),
+    path('logout/', LogoutView.as_view(template_name="logout.html"), name='logout'),
+    path('productos/', views.productos, name='productos'),
 ]
