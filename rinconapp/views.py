@@ -3,7 +3,7 @@ from .models import Cliente, Plaza, Reserva
 from rinconapp.forms import formulario_reserva
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpResponseBadRequest
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 
 
@@ -151,12 +151,9 @@ def login_cliente(request):
     form = AuthenticationForm()
     return render(request, "rinconapp/login.html", {"form": form})
 
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-
 def logout_view(request):
     logout(request)
-    return redirect('inicio')  
+    return render(request, 'rinconapp/logout.html')
 
 
 def productos(request):
