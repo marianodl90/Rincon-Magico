@@ -8,6 +8,8 @@ from django.http import HttpResponse
 
 
 
+
+
 def vista_padre(request):
     return render(request, 'rinconapp/padre.html')
 
@@ -149,14 +151,14 @@ def login_cliente(request):
     form = AuthenticationForm()
     return render(request, "rinconapp/login.html", {"form": form})
 
-def logout(request):
-    
-    if request.method == "POST":
-        pass
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
-    else:
-        return render(request, "rinconapp/padre.html")
-    
+def logout_view(request):
+    logout(request)
+    return redirect('inicio')  
+
 
 def productos(request):
     return render(request, "rinconapp/productos.html")
+
