@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Plaza, Reserva
-from rinconapp.forms import formulario_reserva
+from rinconapp.forms import formulario_reserva, ClienteRegistroForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpResponseBadRequest
 from django.contrib.auth import authenticate, login, logout
@@ -159,3 +159,14 @@ def logout_view(request):
 def productos(request):
     return render(request, "rinconapp/productos.html")
 
+def registro_cliente(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Cliente creado con exito")
+        
+    else:
+        form = UserCreationForm()
+        
+    return render(request, "rinconapp/registro.html", {"form": form})

@@ -1,10 +1,40 @@
-
 {% extends "rinconapp/padre.html" %}
 {% load static %}
 
 {% block content %}
+<div class="container text-center">
+    <h1 class="mb-5">Conocé nuestros Productos Mágicos</h1>
 
-<h1>Conoce nuestros Productos Mágicos</h1>
+    <!-- Imagen destacada: Normas de uso (achicada 30%) -->
+    <div class="mb-5">
+        <img src="{% static 'rinconapp/assets/img/normasdeuso.jpeg' %}" 
+             alt="Normas de uso" 
+             class="img-fluid rounded shadow" 
+             style="max-width: 700px; width: 100%;" />
+    </div>
 
-
- {% endblock %}
+    <!-- Grilla 2x2 con las otras 4 imágenes -->
+    <div class="row row-cols-1 row-cols-sm-2 g-4">
+        <div class="col">
+            <img src="{% static 'rinconapp/assets/img/inflable.jpeg' %}" 
+                 alt="Inflable" 
+                 class="img-fluid rounded shadow" />
+        </div>
+        <div class="col">
+            <img src="{% static 'rinconapp/assets/img/construccion.jpeg' %}" 
+                 alt="Construcción" 
+                 class="img-fluid rounded shadow" />
+        </div>
+        <div class="col">
+            <img src="{% static 'rinconapp/assets/img/rinconxl.jpeg' %}" 
+                 alt="Rincón XL" 
+                 class="img-fluid rounded shadow" />
+        </div>
+        <div class="col">
+            <img src="{% static 'rinconapp/assets/img/montesori.jpeg' %}" 
+                 alt="Montessori" 
+                 class="img-fluid rounded shadow" />
+        </div>
+    </div>
+</div>
+{% endblock %}
