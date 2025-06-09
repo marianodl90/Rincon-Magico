@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Plaza, Reserva
-from rinconapp.forms import formulario_reserva, ClienteRegistroForm
+from rinconapp.forms import formulario_reserva
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpResponseBadRequest
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -13,12 +14,13 @@ from django.http import HttpResponse
 def vista_padre(request):
     return render(request, 'rinconapp/padre.html')
 
+@login_required
 def lista_clientes(request):
     reservas = Reserva.objects.select_related('cliente', 'plaza').all()
     return render(request, "rinconapp/cliente.html", {'reservas': reservas})
 
 
-
+@login_required
 def reserva_formulario(request):
     if request.method == "POST":
         mi_formulario = formulario_reserva(request.POST)
@@ -155,7 +157,7 @@ def logout_view(request):
     logout(request)
     return render(request, 'rinconapp/logout.html')
 
-
+@login_required
 def productos(request):
     return render(request, "rinconapp/productos.html")
 
