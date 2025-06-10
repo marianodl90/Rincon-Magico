@@ -16,23 +16,37 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     ">
         {% csrf_token %}
+        {% if mensaje_exito %}
+        <div style="text-align: center; color: green; margin-top: 20px;">
+            <strong>{{ mensaje_exito }}</strong>
+        </div>
+        {% endif %}
 
-        <input type="text" name="nombre" placeholder="Nombre" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="text" name="nombre" placeholder="Nombre" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="text" name="telefono" placeholder="Telefono" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="text" name="telefono" placeholder="Telefono" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="text" name="nombre_plaza" placeholder="Plaza" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="text" name="nombre_plaza" placeholder="Plaza" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="number" name="pago" step="0.01" placeholder="pago" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="number" name="pago" step="0.01" placeholder="pago" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="date" name="fecha_evento" placeholder="Fecha del evento" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="date" name="fecha_evento" placeholder="Fecha del evento" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="datetime" name="hora_evento" placeholder="Hora del evento" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="datetime" name="hora_evento" placeholder="Hora del evento" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="text" name="direccion_evento" placeholder="Direccion del evento" required style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
+        <input type="text" name="direccion_evento" placeholder="Direccion del evento" required
+            style="width: 100%; padding: 10px; margin-bottom: 15px;"><br>
 
-        <input type="submit" value="Reservar" style="width: 100%; padding: 12px; background-color: #ead0d1; color: white; border: none; border-radius: 5px; cursor: pointer;" class="btn btn-reservar"></a>
-        
+        <input type="submit" value="Reservar"
+            style="width: 100%; padding: 12px; background-color: #ead0d1; color: white; border: none; border-radius: 5px; cursor: pointer;"
+            class="btn btn-reservar"></a>
+
     </form>
 </div>
 {% endblock %}

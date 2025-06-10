@@ -3,6 +3,32 @@
 
 {% block content %}
 
-<h1>Bienvenido a nuestro Rincon Magico</h1>
+<div class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <h1 class="display-4 fw-bold" style="color: #f8bbd0; text-align: center;">¡Bienvenido a Rincón Mágico!</h1>
+                          <p class="lead mt-3">
+                En <strong>Rincón Mágico</strong> te invitamos a vivir momentos únicos con los más pequeños.
+                Nuestro espacio está especialmente diseñado para la diversión de niños y niñas, con:
+            </p>
+            <ul class="list-unstyled">
+                <li>🎈 Inflables gigantes</li>
+                <li>⚽ Peloteros llenos de color</li>
+                <li>🧩 Juegos XL para grandes aventuras</li>
+                <li>🧱 Ladrillos de construcción gigantes</li>
+            </ul>
+            <p class="mt-3">
+                Ideal para cumpleaños, eventos especiales o simplemente para una tarde mágica. ¡Te esperamos!
+            </p>
+            <div class="text-center">
+                <a href="{% url 'reserva_formulario' %}" class="btn btn-lg mt-3"style="background-color: #f8bbd0; border: none; outline: none;">Reservá tu rincón</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'rinconapp/assets/img/2.jpeg' %}" alt="Zona de juegos para niños"
+                class="img-fluid rounded shadow">
+        </div>
+    </div>
+</div>
 
- {% endblock %}
+{% endblock %}

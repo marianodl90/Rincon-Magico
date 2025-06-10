@@ -20,8 +20,15 @@ def lista_clientes(request):
     return render(request, "rinconapp/cliente.html", {'reservas': reservas})
 
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from .forms import formulario_reserva
+from .models import Cliente, Plaza, Reserva
+
 @login_required
 def reserva_formulario(request):
+    mensaje_exito = None 
+
     if request.method == "POST":
         mi_formulario = formulario_reserva(request.POST)
         if mi_formulario.is_valid():
@@ -45,10 +52,16 @@ def reserva_formulario(request):
                 direccion_evento=informacion['direccion_evento']
             )
             reserva.save()
+            mensaje_exito = "¡Reserva realizada con éxito!"
+            mi_formulario = formulario_reserva()  
+    else:
+        mi_formulario = formulario_reserva()
 
-            return render(request, 'rinconapp/reserva.html')    
+    return render(request, 'rinconapp/reserva.html', {
+        "formulario": mi_formulario,
+        "mensaje_exito": mensaje_exito
+    })
 
-    return render(request, 'rinconapp/reserva.html')
 
 
 def eliminar_cliente_y_reserva(request,id):

@@ -31,8 +31,8 @@
             background-attachment: fixed;
             z-index: 0;
             overflow: visible;
-            /* ✅ Permitir contenido largo */
         }
+
 
         main.full-background::before {
             content: "";
@@ -111,7 +111,27 @@
             color: white;
             transform: scale(1.05);
         }
+
+        .carousel-item img {
+            max-height: 600px;
+            object-fit: cover;
+        }
     </style>
+    {% block extra_styles %}
+    <style>
+      .btn-rosado {
+        background-color: #f8c8dc;
+        color: white;
+        border: none;
+        transition: background-color 0.3s ease;
+      }
+    
+      .btn-rosado:hover {
+        background-color: #e6a6c4;
+      }
+    </style>
+    {% endblock %}
+    
 </head>
 
 <body class="text-black">
@@ -119,7 +139,8 @@
 
     <nav class="navbar bg-white flex-column">
         <div class="d-flex justify-content-center">
-            <img src="{% static 'rinconapp/assets/img/logo.jpeg' %}" alt="Logo Rincón Mágico" class="navbar-logo mb-3" />
+            <img src="{% static 'rinconapp/assets/img/logo.jpeg' %}" alt="Logo Rincón Mágico"
+                class="navbar-logo mb-3" />
         </div>
         <div class="container d-flex justify-content-between align-items-center">
             {% if not request.user.is_authenticated %}
@@ -142,13 +163,109 @@
             {% endif %}
         </div>
     </nav>
-    
 
 
     <main class="full-background">
         <div class="content">
             {% block content %}
+            <div class="text-center mb-5 px-3">
+                <h1 class="mb-3 text-white fw-bold">Bienvenidos a Rincón Mágico</h1>
+                <p class="lead text-white mx-auto" style="max-width: 720px; font-size: 1.2rem; line-height: 1.5;">
+                    En Rincón Mágico, ofrecemos un espacio único pensado para el disfrute, la relajación y la conexión
+                    con la naturaleza.
+                </p>
+            </div>
+
+            <div id="carouselZonas" class="carousel slide mb-5" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active text-center">
+                        <img src="{% static 'rinconapp/assets/img/8.jpeg' %}"
+                            class="img-fluid rounded-circle shadow mx-auto d-block"
+                            style="width: 300px; height: 300px; object-fit: cover;" alt="Plaza Central">
+                    </div>
+                    <div class="carousel-item text-center">
+                        <img src="{% static 'rinconapp/assets/img/4.jpeg' %}"
+                            class="img-fluid rounded-circle shadow mx-auto d-block"
+                            style="width: 300px; height: 300px; object-fit: cover;" alt="Rincón Verde">
+                    </div>
+                    <div class="carousel-item text-center">
+                        <img src="{% static 'rinconapp/assets/img/7.jpeg' %}"
+                            class="img-fluid rounded-circle shadow mx-auto d-block"
+                            style="width: 300px; height: 300px; object-fit: cover;" alt="Zona de Juegos">
+                    </div>
+                    <div class="carousel-item text-center">
+                        <img src="{% static 'rinconapp/assets/img/10.jpeg' %}"
+                            class="img-fluid rounded-circle shadow mx-auto d-block"
+                            style="width: 300px; height: 300px; object-fit: cover;" alt="Área de Picnic">
+                    </div>
+                    <div class="carousel-item active text-center">
+                        <img src="{% static 'rinconapp/assets/img/9.jpeg' %}"
+                            class="img-fluid rounded-circle shadow mx-auto d-block"
+                            style="width: 300px; height: 300px; object-fit: cover;" alt="XL">
+                    </div>
+                    <div class="carousel-item active text-center">
+                        <img src="{% static 'rinconapp/assets/img/12.jpeg' %}"
+                            class="img-fluid rounded-circle shadow mx-auto d-block"
+                            style="width: 300px; height: 300px; object-fit: cover;" alt="Plaza Central de lejos">
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselZonas"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselZonas"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+
+
+            <section class="bg-white bg-opacity-90 text-dark rounded-4 shadow p-5 mx-auto text-center mt-5"
+                style="max-width: 1000px;">
+                <h2 class="mb-4 fw-bold text-white"
+                    style="font-size: 2rem; background-color: #acd5d9; padding: 0.75rem; border-radius: 1rem;">
+                    Nuestros Valores
+                </h2>
+                <p class="mb-5" style="font-size: 1.1rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+                    En <strong>Rincón Mágico</strong>, nos dedicamos a brindar experiencias inolvidables en un entorno
+                    seguro, natural y lleno de alegría. Estos son los pilares que nos definen:
+                </p>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="p-4 rounded-4 bg-white h-100 shadow-sm border-top border-3"
+                            style="border-color: #f8b6d2;">
+                            <h5 class="fw-bold mb-3" style="color: #68042e;">Seguridad</h5>
+                            <p style="font-size: 1rem;">Instalaciones mantenidas bajo estrictos controles para que los
+                                niños jueguen con total confianza.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 rounded-4 bg-white h-100 shadow-sm border-top border-3"
+                            style="border-color: #acd5d9;">
+                            <h5 class="fw-bold mb-3" style="color: #0d4c4f;">Sostenibilidad</h5>
+                            <p style="font-size: 1rem;">Cuidamos el medio ambiente a través de prácticas responsables y
+                                ecológicas en todos nuestros espacios.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 rounded-4 bg-white h-100 shadow-sm border-top border-3"
+                            style="border-color: #f8b6d2;">
+                            <h5 class="fw-bold mb-3" style="color: #68042e;">Atención Personalizada</h5>
+                            <p style="font-size: 1rem;">Estamos siempre atentos a cada familia, para asegurar
+                                experiencias únicas e inolvidables.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
             {% endblock %}
+
+
         </div>
     </main>
 
