@@ -36,6 +36,7 @@ def reserva_formulario(request):
 
             cliente, _ = Cliente.objects.get_or_create(
                 nombre=informacion['nombre'],
+                apellido=informacion['apellido'],
                 telefono=informacion['telefono']
             )
 
@@ -85,6 +86,7 @@ def actualizar_cliente_y_reserva(request, id):
             datos = mi_formulario.cleaned_data
 
             cliente.nombre = datos["nombre"]
+            cliente.apellido = datos["apellido"]
             cliente.telefono = datos["telefono"]
             cliente.save()
 
@@ -105,6 +107,7 @@ def actualizar_cliente_y_reserva(request, id):
     else:
         datos_iniciales = {
             "nombre": cliente.nombre,
+            "apellido": cliente.apellido,
             "telefono": cliente.telefono,
             "nombre_plaza": plaza.nombre_plaza,
             "pago": plaza.pago,

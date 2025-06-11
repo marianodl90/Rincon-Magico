@@ -118,6 +118,7 @@
     {% for reserva in reservas %}
     <div class="reserva-casillero">
         <div class="casillero col-nombre">{{ reserva.cliente.nombre }}</div>
+        <div class="casillero col-nombre">{{ reserva.cliente.apellido }}</div>
         <div class="casillero col-plaza">{{ reserva.plaza.nombre_plaza }}</div>
         <div class="casillero col-sena">{{ reserva.fecha_evento }}</div>
         <div class="casillero col-sena-2">{{ reserva.hora_evento }}</div>

@@ -1,15 +1,20 @@
 import time
 from django.db import models
+from django.forms import ValidationError
 from django.utils import timezone
 
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
     telefono = models.CharField(max_length=20)
-    
 
+    def clean(self):
+        if Cliente.objects.filter(nombre=self.nombre, apellido=self.apellido, telefono=self.telefono).exclude(id=self.id).exists():
+            raise ValidationError("Ya existe un cliente con este nombre y correo.")
+        
     def __str__(self):
-        return f"{self.nombre}{self.telefono}"
+        return f"{self.nombre}{self.apellido}{self.telefono}"
     
 
     

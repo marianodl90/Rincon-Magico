@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 class formulario_reserva(forms.Form):
     nombre = forms.CharField(max_length=100, label="Nombre")
+    apellido = forms.CharField(max_length=100, label="Apellido")
     telefono = forms.CharField(max_length=20, label="Teléfono")
     nombre_plaza = forms.CharField(max_length=100, label="Nombre de la Plaza")
     pago = forms.DecimalField(max_digits=10, decimal_places=2, label="Pago")
@@ -12,7 +13,7 @@ class formulario_reserva(forms.Form):
     direccion_evento = forms.CharField(max_length=255, label="Dirección del Evento")
 
     def __str__(self):
-        return f"{self.nombre}{self.telefono}{self.nombre_plaza}{self.pago}{self.fecha_evento}{self.hora_evento}{self.direccion_evento}" 
+        return f"{self.nombre}{self.apellido}{self.telefono}{self.nombre_plaza}{self.pago}{self.fecha_evento}{self.hora_evento}{self.direccion_evento}" 
 
 from django import forms
 from django.contrib.auth.models import User
