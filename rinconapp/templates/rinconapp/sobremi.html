@@ -1,0 +1,29 @@
+{% extends "rinconapp/padre.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container py-5 text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="display-4 fw-bold mb-4" style="color: #f8bbd0;">Sobre mí</h1>
+            <img src="{% static 'rinconapp/assets/img/Mariano.jpg' %}" alt="Mariano"
+                class="img-fluid rounded-circle shadow mb-4"
+                style="width: 250px; height: 250px; object-fit: contain; background-color: #fff;" />
+            <p class="lead">
+                Hola, soy Mariano De Luis, profesor de Educación Física con una fuerte vocación por el aprendizaje y la
+                tecnología. Hace dos años descubrí el mundo de la programación y desde entonces me dedico con entusiasmo
+                a estudiar y practicar distintos lenguajes y herramientas del desarrollo de software.
+                <br><br>
+                Me apasiona entender cómo funcionan las cosas desde adentro, resolver problemas de forma lógica y seguir
+                aprendiendo constantemente. Estoy especialmente interesado en el desarrollo web, la creación de
+                aplicaciones funcionales y el trabajo en equipo dentro del mundo IT.
+                <br><br>
+                Mi formación en educación física me dio habilidades clave como la disciplina, el trabajo colaborativo y
+                la capacidad de adaptación, que hoy aplico con mucho compromiso en mi camino como desarrollador.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

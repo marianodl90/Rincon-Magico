@@ -188,3 +188,6 @@ def registro_cliente(request):
         form = UserCreationForm()
         
     return render(request, "rinconapp/registro.html", {"form": form})
+
+def sobre_mi(request):
+    return render(request, "rinconapp/sobremi.html")
