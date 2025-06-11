@@ -2,6 +2,37 @@
 {% load static %}
 
 {% block content %}
-<h1>Gracias por visitarnos</h1>
-<a href="{% url 'login_cliente' %}">Volver a iniciar sesión</a>
+<style>
+    .gracias-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 60vh;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .btn-volver {
+        background-color: #f7a4b8;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-volver:hover {
+        background-color: #e2788f;
+    }
+</style>
+
+<div class="gracias-container">
+    <h1>Gracias por visitarnos</h1>
+    <a href="{% url 'login_cliente' %}" class="btn-volver">Volver a iniciar sesión</a>
+</div>
 {% endblock %}
