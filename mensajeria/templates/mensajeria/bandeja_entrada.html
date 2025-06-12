@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <h2>Bandeja de Entrada</h2>
+        <ul>
+            {% for mensaje in mensajes %}
+            <li><strong>De:</strong> {{ mensaje.remitente }} <br>
+                <strong>Mensaje:</strong> {{ mensaje.contenido }} <br>
+                <em>{{ mensaje.fecha_envio }}</em>
+            </li>
+            {% empty %}
+            <li>No tienes mensajes.</li>
+            {% endfor %}
+        </ul>
+
+    </main>
+</body>
+
+</html>

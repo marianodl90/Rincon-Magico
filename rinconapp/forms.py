@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from .models import Cliente
+ 
 class formulario_reserva(forms.Form):
     nombre = forms.CharField(max_length=100, label="Nombre")
     apellido = forms.CharField(max_length=100, label="Apellido")
@@ -14,10 +15,19 @@ class formulario_reserva(forms.Form):
 
     def __str__(self):
         return f"{self.nombre}{self.apellido}{self.telefono}{self.nombre_plaza}{self.pago}{self.fecha_evento}{self.hora_evento}{self.direccion_evento}" 
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        nombre = cleaned_data.get("nombre")
+        apellido = cleaned_data.get("apellido")
+        telefono = cleaned_data.get("telefono")
 
-from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+        if nombre and apellido and telefono:
+            if Cliente.objects.filter(nombre=nombre, apellido=apellido, telefono=telefono).exists():
+                raise forms.ValidationError("Este cliente ya está registrado.")
+
+        return cleaned_data
+
 
 class ClienteRegistroForm(UserCreationForm):
     username = forms.CharField(

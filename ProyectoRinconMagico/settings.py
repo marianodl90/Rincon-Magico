@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rinconapp',
     'widget_tweaks',
+    'mensajeria',
 ]
 
 MIDDLEWARE = [
